@@ -1,8 +1,11 @@
+#pragma once
+
 #include <optional>
 #include <array>
 #include <utility>
 
 enum class tipo_comando {
+	vazio,
 	note_on,
 	note_off
 };

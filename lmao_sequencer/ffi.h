@@ -1,3 +1,5 @@
+#pragma once
+
 #ifdef __WIN32__
 #define exported extern "C" __declspec(dllexport) __cdecl
 #elif __GNUC__
