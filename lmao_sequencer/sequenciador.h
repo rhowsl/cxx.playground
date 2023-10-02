@@ -13,6 +13,8 @@
 
 constexpr const int NO_PASSOS = 16;
 
+#include "tipos.h"
+
 class sequenciador {
 	private:
 		std::thread _thread_controle;
@@ -31,6 +33,15 @@ class sequenciador {
 	public:
 		sequenciador();
 		~sequenciador();
+		std::atomic<int> _posicao_cursor;
+		std::array<coluna, NO_COLUNAS> _colunas;
+
+		int _bpm = 150;
+		bool _em_loop = false;
+
+	public:
+		sequenciador() = default;
+		~sequenciador() = default;
 
 		void tocar(bool loop);
 		void pausar();
@@ -39,4 +50,7 @@ class sequenciador {
 
 	private:
 		void loop_thread_controle();
+
+	private:
+		void _loop_thread_controle();
 };
