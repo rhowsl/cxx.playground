@@ -33,15 +33,6 @@ class sequenciador {
 	public:
 		sequenciador();
 		~sequenciador();
-		std::atomic<int> _posicao_cursor;
-		std::array<coluna, NO_COLUNAS> _colunas;
-
-		int _bpm = 150;
-		bool _em_loop = false;
-
-	public:
-		sequenciador() = default;
-		~sequenciador() = default;
 
 		void tocar(bool loop);
 		void pausar();
