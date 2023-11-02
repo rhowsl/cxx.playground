@@ -27,8 +27,8 @@ class sequenciador {
 		std::atomic<bool> _killswitch = false;
 		std::atomic<bool> _pausado = true;
 
-		// greenhouse - theriocide (arc,regn)
-		double _bpm = 83 * 2;
+		// greenhouse - mirabillis (slowed)
+		double _bpm = 132;
 
 	public:
 		sequenciador();

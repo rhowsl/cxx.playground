@@ -41,12 +41,16 @@ void sequenciador::loop_thread_controle() {
 		unsigned int canal = 0;
 
 		std::stringstream saida;
-		saida << std::format("T {} | ", _posicao_cursor.load());
+		saida << std::format("T {:03d} | ", _posicao_cursor.load());
 
 		for (const auto& cmd : linha_atual) {
 			cmd
-				.and_then([this, canal, &saida](const comando& c) {
-					saida << std::format("CH {}: E {}, V {} | ", canal, (int)c.first, c.second.value_or(-1));
+				.or_else([canal, &saida]() {
+					saida << std::format("CH {:03d}: E ---, V --- | ", canal);
+					return std::optional<comando> { std::nullopt };
+				})
+				.and_then([canal, &saida](const comando& c) {
+					saida << std::format("CH {:03d}: E {:03d}, V {:03d} | ", canal, (int)c.first, c.second.value_or(-1));
 					return std::optional<comando> { std::nullopt };
 				});
 
@@ -67,8 +71,8 @@ void sequenciador::loop_thread_controle() {
 		}
 
 		double intervalo_compasso = (1.0 / (2.0 * (double)_bpm)) * 60;
-		uint64_t intervalo_compasso_ns = std::round(intervalo_compasso * 1000000000);
+		uint64_t intervalo_compasso_ns = std::round(intervalo_compasso * 1000000);
 
-		std::this_thread::sleep_for(std::chrono::nanoseconds(intervalo_compasso_ns));
+		std::this_thread::sleep_for(std::chrono::microseconds(intervalo_compasso_ns));
 	}
 }
