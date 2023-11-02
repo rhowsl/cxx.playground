@@ -6,3 +6,4 @@ source_files = [
 
 executable('corotinas_1', ['src/main.cc'])
 executable('corotinas_2', ['src/cppreference_1.cc'])
+executable('corotinas_3', ['src/yield.cc'])
